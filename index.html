@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
     <title>Document</title>
     <script>
         transition = {"7":	"1011",
@@ -409,31 +409,56 @@ console.log(info['1011']['eq_effect'])
     </script>
     <script src="./vue.js"></script>
     <style>
-    *{padding: 0}
+    *{padding: 0;margin: 0px;}
+
+
     table{
-        background: #555;
+        /* background: #888; */
+		
+	background: -moz-linear-gradient(top, #888 0%, #444 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#888), color-stop(100%,#444));
+    background: -webkit-linear-gradient(top, #888 0%,#444 100%);
+    background: -o-linear-gradient(top, #888 0%,#444 100%);
+    background: -ms-linear-gradient(top, #888 0%,#444 100%);
+    background: linear-gradient(to bottom, #888 0%,#444 100%);
         color: #ddd;
-        
+        font-size: 8px;
     }
+	tr {
+		width: 1980px;
+		/* background: yellow; */
+		display: block;
+	}
     td {
         width: 220px;
-        height: 120px;
+        height: 110px;
+		display: inline-block;
     }
     img{
+		padding-top: 23px;
+		width: 64px;
+		height: 64px;
+    }
+	.left{
         width: 64px;
-        height: 64px;
-        padding-top: 28px;
+	}
+    .right{
+		width: 156px;
+		/* background: blue; */
     }
-    .info{
-        width: 156px;
-        height: 120px;
-        /* background: yellow; */
-        text-align:center;
-    }
-    img, .info{
+    .left, .right{
+		height: 110px;
         display: block;
         float: left;
     }
+	.info{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 110px;
+		padding: 10px;
+		/* background: yellow; */
+	}
     </style>
 </head>
 
@@ -453,16 +478,21 @@ console.log(info['1011']['eq_effect'])
     </table> -->
     <div id="table0">
         <table>
-                <tr v-for="i in [0,8,7,6,5,4,3,2,1]">
-                    <td v-for="j in [0,1,2,3,4,5,6,7,8]">
-                        <div   v-if="(i>=j ||i ==0) && i+j>0" >
-                        <img :src="getImgUrl(i,j)" :i='i' :j='j'>
-                        <div class="info">
-                            {{getName(i,j)}}<br>
-                            {{getInfo(i,j)}}
-                        </div>
-                    </div></td>
-                </tr>
+			<tr v-for="i in [0,8,7,6,5,4,3,2,1]">
+				<td v-for="j in [0,1,2,3,4,5,6,7,8]">
+					<div   v-if="(i>=j ||i ==0) && i+j>0" >
+						<div class="left">
+								<img :src="getImgUrl(i,j)" :i='i' :j='j'>
+						</div>
+						<div class="right">
+							<div class="info">
+								<!-- {{getName(i,j)}}<br> -->
+								{{getInfo(i,j)}}
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
         </table>
     </div>
 </body>
