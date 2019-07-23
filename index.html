@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <script>
+        transition = {"7": "1011","5": "1031","1": "1038","3": "1043","6": "1057","2": "1058","78": "3022","15": "3026","11": "3031","35": "3046","44": "3048","4": "3070","55": "3075","77": "3083","68": "3085","34": "3087","22": "3089","12": "3146","14": "3161","67": "3172","26": "3178","25": "3190","24": "3285","37": "3748","8": "4000","16": "4001","48": "4002","36": "4003","66": "4004","46": "4005","58": "4006","27": "4007","57": "4008","56": "4009","28": "4010","17": "4011","88": "4401"}
+
+info = {
+	"1011": {
+		"eq_effect": "+200生命值 ",
+		"eq_formula": "",
+		"eq_heroes": "",
+		"eq_keywords": "生命值",
+		"eq_name": "巨人腰带\t",
+		"equipmentId": "1011"
+	},
+	"1031": {
+		"eq_effect": "+20护甲 ",
+		"eq_formula": "",
+		"eq_heroes": "",
+		"eq_keywords": "护甲",
+		"eq_name": "锁子甲\t",
+		"equipmentId": "1031"
+	},
+	"1038": {
+		"eq_effect": "+20点攻击力",
+		"eq_formula": "",
+		"eq_heroes": "",
+		"eq_keywords": "攻击力",
+		"eq_name": "暴风大剑\t",
+		"equipmentId": "1038"
+	},
+	"1043": {
+		"eq_effect": "+15%攻速",
+		"eq_formula": "",
+		"eq_heroes": "",
+		"eq_keywords": "攻击速度",
+		"eq_name": "反曲之弓\t",
+		"equipmentId": "1043"
+	},
+	"1057": {
+		"eq_effect": "+20点魔法抗性",
+		"eq_formula": "",
+		"eq_heroes": "",
+		"eq_keywords": "魔法抗性",
+		"eq_name": "负极斗篷\t",
+		"equipmentId": "1057"
+	},
+	"1058": {
+		"eq_effect": "+20%技能伤害",
+		"eq_formula": "",
+		"eq_heroes": "",
+		"eq_keywords": "技能伤害",
+		"eq_name": "无用大棒",
+		"equipmentId": "1058"
+	},
+	"3022": {
+		"eq_effect": "装备者也视为极地 ",
+		"eq_formula": "1011,4000",
+		"eq_heroes": "",
+		"eq_keywords": "特质,生命值",
+		"eq_name": "冰霜之锤",
+		"equipmentId": "3022"
+	},
+	"3026": {
+		"eq_effect": "阵亡可复活,复活后500生命值",
+		"eq_formula": "1038,1031",
+		"eq_heroes": "",
+		"eq_keywords": "攻击力,护甲",
+		"eq_name": "守护天使",
+		"equipmentId": "3026"
+	},
+	"3031": {
+		"eq_effect": "+100%暴击伤害   ",
+		"eq_formula": "1038,1038",
+		"eq_heroes": "",
+		"eq_keywords": "攻击力,暴击伤害   ",
+		"eq_name": "无尽之刃",
+		"equipmentId": "3031"
+	},
+	"3046": {
+		"eq_effect": "装备者闪避所有暴击攻击",
+		"eq_formula": "1043,1031",
+		"eq_heroes": "",
+		"eq_keywords": "闪避,攻速,护甲",
+		"eq_name": "幻影之舞",
+		"equipmentId": "3046"
+	},
+	"3048": {
+		"eq_effect": "每次有技能被施放时，回复20%法力值。",
+		"eq_formula": "3070,3070",
+		"eq_heroes": "",
+		"eq_keywords": "法力值",
+		"eq_name": "炽天使之拥",
+		"equipmentId": "3048"
+	},
+	"3070": {
+		"eq_effect": "+20法力值",
+		"eq_formula": "",
+		"eq_heroes": "",
+		"eq_keywords": "法力值",
+		"eq_name": "女神之泪\t",
+		"equipmentId": "3070"
+	},
+	"3075": {
+		"eq_effect": "攻击伤害反弹35%",
+		"eq_formula": "1031,1031",
+		"eq_heroes": "",
+		"eq_keywords": "护甲,反弹伤害",
+		"eq_name": "荆棘之甲",
+		"equipmentId": "3075"
+	},
+	"3083": {
+		"eq_effect": "每秒恢复3%自身最大生命值。",
+		"eq_formula": "1011,1011",
+		"eq_heroes": "",
+		"eq_keywords": "生命值",
+		"eq_name": "狂徒铠甲",
+		"equipmentId": "3083"
+	},
+	"3085": {
+		"eq_effect": "普攻对额外2个目标造成伤害，额外攻击造成50%的伤害。",
+		"eq_formula": "4000,1057",
+		"eq_heroes": "",
+		"eq_keywords": "额外伤害,攻击速度",
+		"eq_name": "卢安娜的飓风",
+		"equipmentId": "3085"
+	},
+	"3087": {
+		"eq_effect": "每3次攻击，造成100点溅射魔法伤害。",
+		"eq_formula": "1043,3070",
+		"eq_heroes": "",
+		"eq_keywords": "攻速,法力值",
+		"eq_name": "斯塔缇克电刃",
+		"equipmentId": "3087"
+	},
+	"3089": {
+		"eq_effect": "增加50%技能伤害",
+		"eq_formula": "1058,1058",
+		"eq_heroes": "",
+		"eq_keywords": "技能伤害",
+		"eq_name": "灭世者的死亡之帽",
+		"equipmentId": "3089"
+	},
+	"3094": {
+		"eq_effect": "携带者的攻击不会被闪避，攻击距离加倍。",
+		"eq_formula": "1043,1043",
+		"eq_heroes": "",
+		"eq_keywords": "闪避,攻速",
+		"eq_name": "疾射火炮",
+		"equipmentId": "3094"
+	},
+	"3107": {
+		"eq_effect": "死亡时，治疗附近所有友军1000点生命值。",
+		"eq_formula": "3070,1011",
+		"eq_heroes": "",
+		"eq_keywords": "治疗,法力值,生命值",
+		"eq_name": "救赎",
+		"equipmentId": "3107"
+	},
+	"3110": {
+		"eq_effect": "邻近格子的敌人降低20%攻击速度。",
+		"eq_formula": "3070,1031",
+		"eq_heroes": "",
+		"eq_keywords": "弱化,护甲,法力值",
+		"eq_name": "冰霜之心",
+		"equipmentId": "3110"
+	},
+	"3124": {
+		"eq_effect": "每次攻击增加3%攻击速度，无上限",
+		"eq_formula": "1043,1058",
+		"eq_heroes": "",
+		"eq_keywords": "攻击速度,技能伤害",
+		"eq_name": "鬼索的狂暴之刃",
+		"equipmentId": "3124"
+	},
+	"3131": {
+		"eq_effect": "携带者每秒获得5%的暴击率",
+		"eq_formula": "1038,1043",
+		"eq_heroes": "",
+		"eq_keywords": "攻击力,攻速,暴击",
+		"eq_name": "神圣之剑",
+		"equipmentId": "3131"
+	},
+	"3142": {
+		"eq_effect": "携带者也是刺客单位",
+		"eq_formula": "4000,1038",
+		"eq_heroes": "",
+		"eq_keywords": "特质,攻击力",
+		"eq_name": "幽梦之灵",
+		"equipmentId": "3142"
+	},
+	"3143": {
+		"eq_effect": "携带者也是剑士",
+		"eq_formula": "4000,1043",
+		"eq_heroes": "",
+		"eq_keywords": "特质,剑士",
+		"eq_name": "破败王者之刃",
+		"equipmentId": "3143"
+	},
+	"3146": {
+		"eq_effect": "+25%全能吸血  ",
+		"eq_formula": "1038,1058",
+		"eq_heroes": "",
+		"eq_keywords": "吸血,攻击力,技能伤害",
+		"eq_name": "海克斯科技枪刃",
+		"equipmentId": "3146"
+	},
+	"3161": {
+		"eq_effect": "在使用技能后，携带者的每次攻击回复15%最大法力值。",
+		"eq_formula": "1038,3070",
+		"eq_heroes": "",
+		"eq_keywords": "法力值,攻击力",
+		"eq_name": "朔极之矛",
+		"equipmentId": "3161"
+	},
+	"3172": {
+		"eq_effect": "战斗开始时，放逐1个敌人持续5秒。",
+		"eq_formula": "1011,1057",
+		"eq_heroes": "",
+		"eq_keywords": "放逐,魔抗,生命值",
+		"eq_name": "灵风",
+		"equipmentId": "3172"
+	},
+	"3178": {
+		"eq_effect": "每当敌人使用技能，他们受到200点伤害。",
+		"eq_formula": "1058,1057",
+		"eq_heroes": "",
+		"eq_keywords": "技能伤害,魔抗",
+		"eq_name": "离子火花",
+		"equipmentId": "3178"
+	},
+	"3190": {
+		"eq_effect": "战斗开始前，所有邻近格子的友军获得一个200点护盾。",
+		"eq_formula": "1058,1031",
+		"eq_heroes": "",
+		"eq_keywords": "技能伤害,护甲",
+		"eq_name": "钢铁烈焰之匣",
+		"equipmentId": "3190"
+	},
+	"3285": {
+		"eq_effect": "技能对命中目标造成200点溅射伤害。",
+		"eq_formula": "3070,1058",
+		"eq_heroes": "",
+		"eq_keywords": "法力值,技能伤害",
+		"eq_name": "卢登的回声",
+		"equipmentId": "3285"
+	},
+	"3748": {
+		"eq_effect": "攻击对敌人造成携带者10%最大生命值的溅射伤害。",
+		"eq_formula": "1011,1043",
+		"eq_heroes": "",
+		"eq_keywords": "生命值,攻速,溅射伤害",
+		"eq_name": "巨型九头蛇",
+		"equipmentId": "3748"
+	},
+	"4000": {
+		"eq_effect": "特殊装备合成必备道具",
+		"eq_formula": "",
+		"eq_heroes": "",
+		"eq_keywords": "",
+		"eq_name": "铲子\t",
+		"equipmentId": "4000"
+	},
+	"4001": {
+		"eq_effect": "普攻攻击附带50%吸血",
+		"eq_formula": "1038,1057",
+		"eq_heroes": "",
+		"eq_keywords": "吸血,魔抗,攻击力",
+		"eq_name": "饮血剑",
+		"equipmentId": "4001"
+	},
+	"4002": {
+		"eq_effect": "装备者也视为恶魔",
+		"eq_formula": "4000,3070",
+		"eq_heroes": "",
+		"eq_keywords": "特质,法力值",
+		"eq_name": "暗裔",
+		"equipmentId": "4002"
+	},
+	"4003": {
+		"eq_effect": "普通攻击有概率使敌人缩小1星  ",
+		"eq_formula": "1043,1057",
+		"eq_heroes": "",
+		"eq_keywords": "弱化,攻速,魔抗",
+		"eq_name": "诅咒之刃",
+		"equipmentId": "4003"
+	},
+	"4004": {
+		"eq_effect": "装备者获得83%魔法抗性",
+		"eq_formula": "1057,1057",
+		"eq_heroes": "",
+		"eq_keywords": "魔抗",
+		"eq_name": "巨龙之爪",
+		"equipmentId": "4004"
+	},
+	"4005": {
+		"eq_effect": "普通攻击有几率对敌人造成沉默",
+		"eq_formula": "3070,1057",
+		"eq_heroes": "",
+		"eq_keywords": "法力值,魔抗,沉默",
+		"eq_name": "肃静",
+		"equipmentId": "4005"
+	},
+	"4006": {
+		"eq_effect": "携带者也是骑士单位。",
+		"eq_formula": "4000,1031",
+		"eq_heroes": "",
+		"eq_keywords": "特质,护甲",
+		"eq_name": "骑士之誓",
+		"equipmentId": "4006"
+	},
+	"4007": {
+		"eq_effect": "技能造成灼烧伤害，每秒伤害为敌人最大生命值的2.5%。",
+		"eq_formula": "1058,1011",
+		"eq_heroes": "",
+		"eq_keywords": "持续伤害,技能伤害,生命值",
+		"eq_name": "莫雷洛秘典",
+		"equipmentId": "4007"
+	},
+	"4008": {
+		"eq_effect": "攻击造成2.5%的灼烧伤害。",
+		"eq_formula": "1011,1031",
+		"eq_heroes": "",
+		"eq_keywords": "持续伤害，护甲，生命值",
+		"eq_name": "蜥蜴长老之赐",
+		"equipmentId": "4008"
+	},
+	"4009": {
+		"eq_effect": "普通攻击有几率对敌人造成缴械",
+		"eq_formula": "1031,1057",
+		"eq_heroes": "",
+		"eq_keywords": "缴械,护甲,魔抗",
+		"eq_name": "折剑者",
+		"equipmentId": "4009"
+	},
+	"4010": {
+		"eq_effect": "携带者也是法师单位。",
+		"eq_formula": "4000,1058",
+		"eq_heroes": "",
+		"eq_keywords": "特质,技能伤害",
+		"eq_name": "悠米",
+		"equipmentId": "4010"
+	},
+	"4011": {
+		"eq_effect": "临近格子的友军获得10%攻击速度。",
+		"eq_formula": "1038,1011",
+		"eq_heroes": "",
+		"eq_keywords": "攻速,攻击力,生命值",
+		"eq_name": "基克的先驱",
+		"equipmentId": "4011"
+	},
+	"4401": {
+		"eq_effect": "可上阵人数+1",
+		"eq_formula": "4000,4000",
+		"eq_heroes": "",
+		"eq_keywords": "特质,上阵人数",
+		"eq_name": "自然之力",
+		"equipmentId": "4401"
+	}
+}
+    </script>
+</head>
+
+<body>
+    <!-- <table>
+        <tr>
+            <td><img src="./img/0.png" alt="">0</td>
+            <td><img src="./img/1.png" alt="">1</td>
+            <td><img src="./img/2.png" alt="">2</td>
+            <td><img src="./img/3.png" alt="">3</td>
+            <td><img src="./img/4.png" alt="">4</td>
+            <td><img src="./img/5.png" alt="">5</td>
+            <td><img src="./img/6.png" alt="">6</td>
+            <td><img src="./img/7.png" alt="">7</td>
+            <td><img src="./img/8.png" alt="">8</td>
+        </tr>
+        <tr>
+            <td><img src="./img/1.png" alt="">1</td>
+            <td><img src="./img/11.png" alt="">11</td>
+            <td><img src="./img/12.png" alt="">12</td>
+            <td><img src="./img/13.png" alt="">13</td>
+            <td><img src="./img/14.png" alt="">14</td>
+            <td><img src="./img/15.png" alt="">15</td>
+            <td><img src="./img/16.png" alt="">16</td>
+            <td><img src="./img/17.png" alt="">17</td>
+            <td><img src="./img/18.png" alt="">18</td>
+        </tr>
+        <tr>
+            <td><img src="./img/2.png" alt="">2</td>
+            <td><img src="./img/12.png" alt="">12</td>
+            <td><img src="./img/22.png" alt="">22</td>
+            <td><img src="./img/23.png" alt="">23</td>
+            <td><img src="./img/24.png" alt="">24</td>
+            <td><img src="./img/25.png" alt="">25</td>
+            <td><img src="./img/26.png" alt="">26</td>
+            <td><img src="./img/27.png" alt="">27</td>
+            <td><img src="./img/28.png" alt="">28</td>
+        </tr>
+        <tr>
+            <td><img src="./img/3.png" alt="">3</td>
+            <td><img src="./img/13.png" alt="">13</td>
+            <td><img src="./img/23.png" alt="">23</td>
+            <td><img src="./img/33.png" alt="">33</td>
+            <td><img src="./img/34.png" alt="">34</td>
+            <td><img src="./img/35.png" alt="">35</td>
+            <td><img src="./img/36.png" alt="">36</td>
+            <td><img src="./img/37.png" alt="">37</td>
+            <td><img src="./img/38.png" alt="">38</td>
+        </tr>
+        <tr>
+            <td><img src="./img/4.png" alt="">4</td>
+            <td><img src="./img/14.png" alt="">14</td>
+            <td><img src="./img/24.png" alt="">24</td>
+            <td><img src="./img/34.png" alt="">34</td>
+            <td><img src="./img/44.png" alt="">44</td>
+            <td><img src="./img/45.png" alt="">45</td>
+            <td><img src="./img/46.png" alt="">46</td>
+            <td><img src="./img/47.png" alt="">47</td>
+            <td><img src="./img/48.png" alt="">48</td>
+        </tr>
+        <tr>
+            <td><img src="./img/5.png" alt="">5</td>
+            <td><img src="./img/15.png" alt="">15</td>
+            <td><img src="./img/25.png" alt="">25</td>
+            <td><img src="./img/35.png" alt="">35</td>
+            <td><img src="./img/45.png" alt="">45</td>
+            <td><img src="./img/55.png" alt="">55</td>
+            <td><img src="./img/56.png" alt="">56</td>
+            <td><img src="./img/57.png" alt="">57</td>
+            <td><img src="./img/58.png" alt="">58</td>
+        </tr>
+        <tr>
+            <td><img src="./img/6.png" alt="">6</td>
+            <td><img src="./img/16.png" alt="">16</td>
+            <td><img src="./img/26.png" alt="">26</td>
+            <td><img src="./img/36.png" alt="">36</td>
+            <td><img src="./img/46.png" alt="">46</td>
+            <td><img src="./img/56.png" alt="">56</td>
+            <td><img src="./img/66.png" alt="">66</td>
+            <td><img src="./img/67.png" alt="">67</td>
+            <td><img src="./img/68.png" alt="">68</td>
+        </tr>
+        <tr>
+            <td><img src="./img/7.png" alt="">7</td>
+            <td><img src="./img/17.png" alt="">17</td>
+            <td><img src="./img/27.png" alt="">27</td>
+            <td><img src="./img/37.png" alt="">37</td>
+            <td><img src="./img/47.png" alt="">47</td>
+            <td><img src="./img/57.png" alt="">57</td>
+            <td><img src="./img/67.png" alt="">67</td>
+            <td><img src="./img/77.png" alt="">77</td>
+            <td><img src="./img/78.png" alt="">78</td>
+        </tr>
+        <tr>
+            <td><img src="./img/8.png" alt="">8</td>
+            <td><img src="./img/18.png" alt="">18</td>
+            <td><img src="./img/28.png" alt="">28</td>
+            <td><img src="./img/38.png" alt="">38</td>
+            <td><img src="./img/48.png" alt="">48</td>
+            <td><img src="./img/58.png" alt="">58</td>
+            <td><img src="./img/68.png" alt="">68</td>
+            <td><img src="./img/78.png" alt="">78</td>
+            <td><img src="./img/88.png" alt="">88</td>
+        </tr>
+    </table> -->
+
+
+    <table id="table0">
+        <tr v-for="i in 8">
+            <tr v-for="j in 8">{{i}}{{j}}</tr>
+        </tr>
+        <div>
+        <span v-for="n in 10">{{ n }} </span>
+        </div>
+    </table>
+</body>
+<script>
+
+var example1 = new Vue({
+  el: '#table0',
+  data: {
+    transition:transition,
+    info:info
+  }
+})
+</script>
+</html>
