@@ -39,6 +39,7 @@
         width: 220px;
         height: 110px;
 		display: inline-block;
+        overflow:hidden;
     }
     img{
 		padding-top: 23px;
@@ -89,13 +90,16 @@
 	#table1 td:first-of-type{
 		width: 316px;
         font-size: 16px;
+        color:  rgb(255, 208, 0);
 	}
 	#table1 tr:first-of-type td{
 		height: 316px;
         font-size: 16px;
+        color:  rgb(255, 208, 0);
 	}
     .getJobIntroduce{
-        font-size: 10px;
+        font-size: 12px;
+        color: rgb(255, 255, 255);
     }
     #table1 td[n="1"] img{
         padding: 32px;
@@ -295,7 +299,7 @@ var table1 = new Vue({
         // race
         
         getRaceName:function(raceId){
-            return TFTrace_List[raceId]["job_name"]
+            return TFTrace_List[raceId]["race_name"]
         },
         getRaceLevelNames:function(raceId){
             var levels = TFTrace_List[raceId]["level"]
