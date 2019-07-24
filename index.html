@@ -97,7 +97,15 @@
     .getJobIntroduce{
         font-size: 10px;
     }
-
+    #table1 td[n="1"] img{
+        padding: 32px;
+    }
+    #table1 td[n="2"] img{
+        padding-top: 32px;
+    }
+    #table1 td[n="3"] img:first-of-type{
+        padding-left: 32px;
+    }
     
     </style>
 </head>
@@ -163,9 +171,9 @@ var table0 = new Vue({
             var id = this.getId(i, j)
             var tran = this.transition[id]
             var infoObj = this.info[tran]
-            console.log(infoObj)
+            // console.log(infoObj)
             var eq_name = infoObj?infoObj["eq_name"]:""
-            console.log(eq_name)
+            // console.log(eq_name)
             return eq_name
             // return infoObj.eq_name
         },
@@ -173,12 +181,12 @@ var table0 = new Vue({
             var id = this.getId(i, j)
 			var tran = this.transition[id]
 			
-            console.log(tran)
-            console.log(this)
+            // console.log(tran)
+            // console.log(this)
             var infoObj = this.info[tran]
-            console.log(infoObj)
+            // console.log(infoObj)
             var eq_effect = infoObj?infoObj["eq_effect"]:""
-            console.log(eq_effect)
+            // console.log(eq_effect)
             return eq_effect
         },
     }
@@ -189,7 +197,7 @@ var table0 = new Vue({
 <div id="table1">
         <table>
 			<tr v-for="i in [0,10,5,1,2,4,8,3,7,9,6]">
-				<td v-for="j in [0,8,7,4,9,6,11,12,13,5,1,2,10,3]">
+				<td v-for="j in [0,8,7,4,9,6,11,12,13,5,1,2,10,3]" :n="fetter[i][j].length">
                     <div v-if="j==0 && i != 0 ">
                             {{getJobName(i)}}({{getJobLevelNames(i)}})
                             <div class="getJobIntroduce">
@@ -219,8 +227,8 @@ var table0 = new Vue({
 // TFTjob_List
 // TFTHeroesData_List
 
-console.log(Object.keys(TFTrace_List).length)
-console.log(Object.keys(TFTjob_List).length)
+// console.log(Object.keys(TFTrace_List).length)
+// console.log(Object.keys(TFTjob_List).length)
 // init fetter array
 fetter = [];
 for (let i = 0; i < Object.keys(TFTjob_List).length+1; i++) {
@@ -230,7 +238,7 @@ for (let i = 0; i < Object.keys(TFTjob_List).length+1; i++) {
 	}
 }
 
-console.log(fetter);
+// console.log(fetter);
 for (const heroIndex in TFTHeroesData_List) {
 	// console.log(heroIndex);
 	var hero = TFTHeroesData_List[heroIndex];
@@ -248,7 +256,7 @@ for (const heroIndex in TFTHeroesData_List) {
 		}
 	});
 }
-console.log(fetter);
+// console.log(fetter);
 var table1 = new Vue({
   el: '#table1',
   data: {
