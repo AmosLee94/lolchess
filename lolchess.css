@@ -55,6 +55,10 @@ img{
     width: 128px;
     height: 128px;
 }
+#table1 table tr{
+    /* border: rgb(170, 154, 154) 1px solid; */
+    width: 2118px;
+}
 #table1 img{
     padding: 0;
 }
