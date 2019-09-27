@@ -18,7 +18,7 @@
 <body>
     <div id="table0">
         <table>
-			<tr v-for="i in ReorderList.length">
+			<tr v-for="i in ReorderList.length" :style="setWith()">
 				<td v-for="j in ReorderList.length">
 					<div   v-if="i+j>2 && i + j < ReorderList.length +3" > <!-- 去掉左上角 , 去掉右下角> -->
                         <div class="left">
@@ -111,6 +111,11 @@ var table0 = new Vue({
             // console.log(eq_effect)
             return eq_effect
         },
+        setWith:function(){
+            console.log(7)
+            return "width:" +(220 * this.ReorderList.length) + "px";
+        },
+
     }
 })
 </script>
