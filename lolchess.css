@@ -10,7 +10,7 @@ background: -o-linear-gradient(top, #888 0%,#444 100%);
 background: -ms-linear-gradient(top, #888 0%,#444 100%);
 background: linear-gradient(to bottom, #888 0%,#444 100%);
     color: #ddd;
-    font-size: 8px;
+    zoom:0.6;
 }
 tr {
     /* width: 1980px; */
@@ -45,7 +45,9 @@ img{
     align-items: center;
     justify-content: center;
     height: 110px;
-    padding: 10px;
+    width: 180px;
+    padding-left: 2px;
+    font-size:1vw;-webkit-transform-origin-x: 0;-webkit-transform: scale(0.80);
     /* background: yellow; */
 }
 
@@ -84,7 +86,7 @@ table td:nth-child(odd){
     color:  rgb(255, 208, 0);
 }
 .getJobIntroduce{
-    font-size: 12px;
+    font-size:1vw;-webkit-transform-origin-x: 0;-webkit-transform: scale(0.80);
     color: rgb(255, 255, 255);
 }
 #table1 .hero{
